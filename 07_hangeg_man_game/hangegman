@@ -1,0 +1,20 @@
+#!/bin/bash
+#Author: Miguel Lorenzo, luzemail at gmail 
+#date:
+#license: GPLv3
+ 
+#this function returns a randon word from the 
+#word list located in the file /usr/share/dict/linux.words 
+function getRandomWord {
+	#we need to know how many words are in the file
+	maxwords=$(wc -l /usr/share/dict/linux.words |awk '{print $1}')
+	#we generate a random number between 1 and the max num of words
+	#$RANDOM is an internal var that generates a random number
+	line=$((RANDOM % maxwords))
+	#now we get the word from the file
+	toret=$( head -n $line /usr/share/dict/linux.words | tail -n 1  )	
+	echo "$toret"
+}
+
+secretword=$(getRandomWord)
+echo "the secret word is $secretword"
