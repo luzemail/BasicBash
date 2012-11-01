@@ -16,5 +16,24 @@ function getRandomWord {
 	echo "$toret"
 }
 
+#print the number of letters used
+function printDiscoveredLetters {
+	discovered=""
+	for ((x=0;x<$secretlenght;x++))
+	do
+		discovered+=" _ "
+	done
+	echo "Your String is $discovered"
+}
+
+#Ask the user to add a new letter
+function askLetter {
+	echo "write a letter to check"
+	read letter
+}
+
+#askLetter
 secretword=$(getRandomWord)
-echo "the secret word is $secretword"
+secretlenght=${#secretword}
+echo "the secret word is $secretword and the lenght is ${#secretword}"
+printDiscoveredLetters
