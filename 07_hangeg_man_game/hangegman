@@ -35,5 +35,12 @@ function askLetter {
 #askLetter
 secretword=$(getRandomWord)
 secretlenght=${#secretword}
+trys=$secretlenght
 echo "the secret word is $secretword and the lenght is ${#secretword}"
-printDiscoveredLetters
+while [ $trys -gt 0 ]
+do
+	printDiscoveredLetters
+	askLetter
+	(( trys-- ))
+done
+
