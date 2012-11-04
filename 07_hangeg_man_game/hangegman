@@ -2,7 +2,12 @@
 #Author: Miguel Lorenzo, luzemail at gmail 
 #date:
 #license: GPLv3
- 
+
+#initialite var 
+function initialiteVars {
+	#the array
+	declare -a LETTERS
+} 
 #this function returns a randon word from the 
 #word list located in the file /usr/share/dict/linux.words 
 function getRandomWord {
@@ -30,12 +35,30 @@ function printDiscoveredLetters {
 function askLetter {
 	echo "write a letter to check"
 	read letter
+
 }
 
-#askLetter
+function letterhasadded {
+	toret=false
+        #todo array length
+    	for ((x=0;x<10;x++))
+	do
+		echo "fill me"
+	done
+
+}
+#http://wiki.bash-hackers.org/syntax/arrays
+initialiteVars
+echo "array size == ${#LETTERS}"#LETTERS
+LETTERS[${#LETTERS}]='bar'
+echo "array size == ${#LETTERS}"#LETTERS
 secretword=$(getRandomWord)
 secretlenght=${#secretword}
 trys=$secretlenght
+for ((x=0;x<$secretlenght;x++))
+do
+ echo ${secretword:x:1}
+done
 echo "the secret word is $secretword and the lenght is ${#secretword}"
 while [ $trys -gt 0 ]
 do
