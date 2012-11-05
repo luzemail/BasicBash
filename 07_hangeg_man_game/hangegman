@@ -8,7 +8,8 @@ function initialiteVars {
 	#the array
 	#declare -a LETTERS
 	LETTERS=()
-} 
+}
+ 
 #this function returns a randon word from the 
 #word list located in the file /usr/share/dict/linux.words 
 function getRandomWord {
@@ -32,6 +33,27 @@ function printDiscoveredLetters {
 	echo "Your String is $discovered"
 }
 
+#receives two parameters
+#    Array array that contains a char list
+#    Character to check
+#    returns true if elements exist in array otherwise false
+function existInAray {
+	toret=FALSE
+	arrayElements=("${!1}")
+	echo "${arrayElements[@]}"
+	for character in "${arrayElements[*]}"
+	do
+	   echo "Character found $character <-- $2"
+	   if [ "$character" == "$2" ];
+	   then  
+		toret=TRUE
+	   fi
+	done
+	#$1 array
+        #$2 char	
+	echo $toret
+}
+
 #Ask the user to add a new letter
 function askLetter {
 	echo "write a letter to check"
@@ -50,12 +72,18 @@ function letterhasadded {
 	done
 
 }
+
+
+
 #http://wiki.bash-hackers.org/syntax/arrays
 initialiteVars
 echo "array size == ${#LETTERS[@]}"#LETTERS
-#LETTERS[]${#LETTERS}='bar'
 
-LETTERS[${#LETTERS}]='b'
+LETTERS[${#LETTERS[@]}]='a'
+LETTERS[${#LETTERS[@]}]='b'
+LETTERS[${#LETTERS[@]}]='c'
+LETTERS[${#LETTERS[@]}]='d'
+existInAray LETTERS[@] 'c'
 echo "array size == ${#LETTERS[@]}"#LETTERS
 secretword=$(getRandomWord)
 secretlenght=${#secretword}
