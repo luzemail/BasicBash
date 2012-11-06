@@ -37,16 +37,15 @@ function printDiscoveredLetters {
 #    Array array that contains a char list
 #    Character to check
 #    returns true if elements exist in array otherwise false
-function existInAray {
-	toret=FALSE
+function existInArray {
+	toret=false
 	arrayElements=("${!1}")
 	echo "${arrayElements[@]}"
 	for character in "${arrayElements[*]}"
 	do
-	   echo "Character found $character <-- $2"
 	   if [ "$character" == "$2" ];
 	   then  
-		toret=TRUE
+		toret=true
 	   fi
 	done
 	#$1 array
@@ -83,7 +82,11 @@ LETTERS[${#LETTERS[@]}]='a'
 LETTERS[${#LETTERS[@]}]='b'
 LETTERS[${#LETTERS[@]}]='c'
 LETTERS[${#LETTERS[@]}]='d'
-existInAray LETTERS[@] 'c'
+exist=$(existInArray LETTERS[@] 'c')
+if (( $(existInArray LETTERS[@] 'c') ));
+then
+	echo "existInArray returns true"
+fi
 echo "array size == ${#LETTERS[@]}"#LETTERS
 secretword=$(getRandomWord)
 secretlenght=${#secretword}
